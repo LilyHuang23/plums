@@ -7,6 +7,13 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    colors: {
+      'tekhelet': '#532B88',
+      'magnolia': '#F4EFFA',
+      'russian-violet': '#2f184b',
+      'amethyst': '#9B72CF',
+      'wisteria': '#C8B1E4'
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

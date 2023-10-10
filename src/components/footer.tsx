@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image'
 
-import mypic from '/public/images/fb.png';
+import mypic from '/Users/huanglily/Desktop/Plums/plums/public/images/fb.png'
+
+
+
 
 
 const Footer = () => {
@@ -16,7 +19,7 @@ const Footer = () => {
                 <li><Link href="/"><Image src="/public/images/pinterest.png" alt='Pinterest icon' width={150} height={150} /></Link></li>
                 <li><Link href="/"><Image src="/public/images/x.png" alt='X(Twitter) icon' width={150} height={150} /></Link></li>
                 <li><Link href="/"><Image src="/public/images/youtube.png" alt='Youtube icon' width={150} height={150} /></Link></li>
-                {/* <li><Link href="/"><Image src="#" alt='Logo' width={200} height={200} /></Link></li> */}
+                <li><Link href="/"><Image src="#" alt='Logo' width={200} height={200} /></Link></li>
                 
             </ul>
             <Link href="/"><image href="#Logo"></image></Link>

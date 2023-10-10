@@ -14,7 +14,7 @@ const Footer = () => {
         <footer className={"dark:bg-violet-500 dark:text-white bg-slate-100 text-black"}>
             <Link href={}>Page</Link>
             <Link href={}>Page</Link>
-            <Link href={"Home"}>PLUMS</Link>
+            <Link  href={"Home"} >PLUMS</Link>
             <Link href={}>Page</Link>
             <Link href={}>Page</Link>
 

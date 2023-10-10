@@ -5,18 +5,16 @@ import mypic from '/Users/huanglily/Desktop/Plums/plums/public/images/fb.png'
 
 
 
-
-
 const Footer = () => {
     const year = new Date().getFullYear()
 
     return (
         <footer className={"dark:bg-violet-500 dark:text-white bg-slate-100 text-black"}>
-            <Link href={}>Page</Link>
-            <Link href={}>Page</Link>
+            <Link href={"#"}>Page</Link>
+            <Link href={"#"}>Page</Link>
             <Link  href={"Home"} >PLUMS</Link>
-            <Link href={}>Page</Link>
-            <Link href={}>Page</Link>
+            <Link href={"#"}>Page</Link>
+            <Link href={"#"}>Page</Link>
 
             <hr></hr>
             <ul>

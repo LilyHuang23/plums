@@ -1,4 +1,4 @@
-
+'use client'
 export default function Hamburger({ isOpen }) {
     return(
         <section>
@@ -27,7 +27,7 @@ export default function Hamburger({ isOpen }) {
                 }
 
                 .burger1 {
-                    transition: all 0.35s linear;
+                    transition: all 0.2s linear;
                     transform: ${ isOpen ? 'rotate(45deg)' : 'rotate(0)'}
                 }
                 .burger2 {

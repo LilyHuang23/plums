@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { useState } from 'react'
 
 import Footer from '../components/footer'
 import Header from '../components/header';
@@ -19,6 +20,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+
+
       <Header />
       <body className={inter.className}>{children}</body>
       {/* <Footer /> */}

@@ -4,12 +4,12 @@ import { useState } from "react"
 
 export default function Nav() {
 
-
     const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
     const toggleHamburger = () => {
         setHamburgerOpen(!hamburgerOpen);
     }
+
     return (
         <div>
             <div className="navigation">
@@ -31,7 +31,7 @@ export default function Nav() {
                     position: absolute;
                     top: 5px;
                     left: 95%;
-                    transition: all 0.4s linear;
+                    transition: all 0.5s linear;
                     transform: ${ hamburgerOpen ? 'translateX(-10%)' : 'translateX(0%)'};
                 }
 

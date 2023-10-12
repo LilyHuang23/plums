@@ -1,4 +1,3 @@
-'use client'
 import { Turn as Hamburger } from 'hamburger-react'
 export default function HamburgerMenu() {
 
@@ -6,11 +5,9 @@ export default function HamburgerMenu() {
         <div>
             <Hamburger onToggle={toggled => {
                 if (toggled) {
-                    document.getElementById("menu").style.transform = "translate(-100px, 0px)";
-                    document.getElementById("menu").style.display = "inline-block";
+                    document.getElementById("menu").style.transform = "translate(-200px, 0px)";
                 } else {
-                    document.getElementById("menu").style.transform = "translate(0px, 0px)";
-                    document.getElementById("menu").style.display = "none";
+                    document.getElementById("menu").style.transform = "translate(400px, 0px)";
                     
                 }
                 }} />
@@ -20,16 +17,6 @@ export default function HamburgerMenu() {
                 <li>Settings</li>
                 <li>Logout</li>
             </ul>
-
-            <style jsx>
-                {`
-                    #menu {
-                        display: none;
-                        position: absolute;
-                        top: 4rem;
-                    }
-                `}
-            </style>
         </div>
 
 

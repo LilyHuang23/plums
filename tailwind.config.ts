@@ -22,7 +22,8 @@ const config: Config = {
         'magnolia': '#F4EFFA',
         'russian-violet': '#2f184b',
         'amethyst': '#9B72CF',
-        'wisteria': '#C8B1E4'
+        'wisteria': '#C8B1E4',
+        'menu-white' : '#f9f9f9'
       },
     },
   },

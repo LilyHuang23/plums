@@ -7,6 +7,12 @@
   margin: 0;
 }
 
+body {
+  background: rgb(47,24,75);
+  background: linear-gradient(270deg, rgba(47,24,75,1) 0%, rgba(200,177,228,1) 57%, rgba(155,114,207,1) 100%);
+}
+
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -22,7 +28,7 @@
 }
 
 #menu {
-  background-color: #d6d6d653;
+  background-color: #f9f9f9;
   transition: 0.2s ease-in-out;
   width: 100%;
   height: 100%;
@@ -40,6 +46,62 @@ padding-top: 10px;
   transition: 0.15s ease-in-out;
   scale: 1.1;
 }
+
+.pricing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+
+.card {
+  scale: 0.9;
+  min-width: 20rem;
+  transition: 0.15s ease-in-out;
+  filter: drop-shadow(2px 2px 1px gray); 
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.card:hover {
+  scale: 1.01;
+  background-color: rgb(83,69,91);
+  background:#2f184b;
+}
+
+.card:hover h2 {
+  color: white;
+  font-size: 28px;
+}
+
+.internal_card {
+  display: flex; 
+  gap: 10px;
+  flex-direction: column;
+  max-width: 100%;
+  height: 80%;
+  background-color: #F4EFFA;
+}
+
+.pricing-button {
+	font-weight: bold;
+	margin: auto 3em 2em 3em; 
+	padding: 1em 2em;
+	color: #fff;
+	border-radius: 30px;
+  background: #4d4766;
+	/* -webkit-transition: background-color 0.3s; */
+	transition: 0.2s;
+}
+
+.pricing-button:hover {
+  background-color: #2f184b;
+}
+.pricing-button:focus {
+  background-color: #2f184b;
+}
+
 
 
 /* :root {

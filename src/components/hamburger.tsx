@@ -1,4 +1,4 @@
-import { Turn as Hamburger } from 'hamburger-react'
+import { Fade as Hamburger } from 'hamburger-react'
 export default function HamburgerMenu() {
 
     return (
@@ -7,8 +7,7 @@ export default function HamburgerMenu() {
                 if (toggled) {
                     document.getElementById("menu").style.transform = "translate(-200px, 0px)";
                 } else {
-                    document.getElementById("menu").style.transform = "translate(400px, 0px)";
-                    
+                    document.getElementById("menu").style.transform = "translate(400px, 0px)";   
                 }
                 }} />
 

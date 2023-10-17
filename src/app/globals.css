@@ -53,11 +53,20 @@ padding-top: 10px;
   align-items: center;
   }
 
+  .pricing-line {
+    width: 90%;
+    margin: auto;
+    height: 1px;
+    background-color: #2f184b;
+  }
+
 .card {
   scale: 0.9;
   min-width: 20rem;
   transition: 0.15s ease-in-out;
-  filter: drop-shadow(2px 2px 1px gray); 
+  border: #C8B1E4 1px solid;
+  border-radius: 5px;
+  /* filter: drop-shadow(2px 2px 1px gray);  */
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -65,23 +74,29 @@ padding-top: 10px;
 }
 
 .card:hover {
-  scale: 1.01;
-  background-color: rgb(83,69,91);
-  background:#2f184b;
+  scale: 90.5%;
+  /* background-color: rgb(83,69,91);
+  background:#9B72CF; */
 }
 
-.card:hover h2 {
-  color: white;
-  font-size: 28px;
+/* .card:hover h2{
+  color: #F4EFFA;
 }
+
+.card:hover h1{
+  color: #F4EFFA;
+} */
+
 
 .internal_card {
   display: flex; 
   gap: 10px;
   flex-direction: column;
   max-width: 100%;
-  height: 80%;
+  height: 60%;
   background-color: #F4EFFA;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .pricing-button {
@@ -90,13 +105,14 @@ padding-top: 10px;
 	padding: 1em 2em;
 	color: #fff;
 	border-radius: 30px;
-  background: #4d4766;
+  background: #2f184b;
 	/* -webkit-transition: background-color 0.3s; */
 	transition: 0.2s;
 }
 
 .pricing-button:hover {
-  background-color: #2f184b;
+  background-color: #9B72CF;
+  
 }
 .pricing-button:focus {
   background-color: #2f184b;

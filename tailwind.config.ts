@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       spacing: {
         'landing-box' : '34rem',
-        '100' : '28rem'
+        '100' : '26rem'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

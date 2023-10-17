@@ -15,8 +15,8 @@ const Footer = () => {
     const year = new Date().getFullYear()
 
     return (
-        <footer className="bg-amethyst w-full m-4 justify-center my-2.5 ">
-            <div className="flex justify-center mx-2.5">
+        <footer className="bg-amethyst p-5 justify-center">
+            <div className="flex justify-center p-5 mx-2.5">
             <Link href={"#"} className='mx-2.5'>Page</Link>
             <Link href={"#"} className='mx-2.5'>Page</Link>
             <Link href={"Home"} className='mx-2.5'>PLUMS</Link>
@@ -24,19 +24,19 @@ const Footer = () => {
             <Link href={"#"} className='mx-2.5'>Page</Link>
             </div>
             <hr></hr>
-            <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-300 sm:mb-0 justify-center">
-                <li><Link href="/"><Image src={fb} alt='Facebook icon' width={30} height={30} /></Link></li>
-                <li><Link href="/"><Image src={ig} alt='Instagram icon' width='30' height='30' /></Link></li>
-                <li><Link href="/"><Image src={linkedIn} alt='Linkedin icon' width={30} height={30} /></Link></li>
+            <ul className="flex flex-wrap items-center p-5 text-sm font-medium text-gray-300 sm:mb-0 justify-center">
+                <li><Link href="/"><Image src={fb} alt='Facebook icon' width={30} height={30} className='mx-2.5'/></Link></li>
+                <li><Link href="/"><Image src={ig} alt='Instagram icon' width='30' height='30' className='mx-2.5'/></Link></li>
+                <li><Link href="/"><Image src={linkedIn} alt='Linkedin icon' width={30} height={30} className='mx-2.5'/></Link></li>
                 <li><Link href="/"><Image src={logo} alt='Logo' width={100} height={100} /></Link></li>
-                <li><Link href="/"><Image src={pinterest} alt='Pinterest icon' width={30} height={30} /></Link></li>
-                <li><Link href="/"><Image src={x} alt='X(Twitter) icon' width={30} height={30} /></Link></li>
-                <li><Link href="/"><Image src={youtube} alt='Youtube icon' width={30} height={30} /></Link></li>
+                <li><Link href="/"><Image src={pinterest} alt='Pinterest icon' width={30} height={30} className='mx-2.5'/></Link></li>
+                <li><Link href="/"><Image src={x} alt='X(Twitter) icon' width={30} height={30} className='mx-2.5'/></Link></li>
+                <li><Link href="/"><Image src={youtube} alt='Youtube icon' width={30} height={30} className='mx-2.5'/></Link></li>
                 
             </ul>
             
             <Link href="/"><image href="#Logo"></image></Link>
-            <div className="md:container flex items-center md:justify-center justify-around flex-wrap md:text-[14px] text-[12px] py-5">
+            <div className="md:container flex items-center md:justify-center justify-around flex-wrap md:text-[14px] text-[12px] p-5">
                 <p className="my-0 mr-[10px] md:mr-3">Copyright © {year} PLUMS</p>
                 <p>
                     Privacy Policy

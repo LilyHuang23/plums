@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Card from '@/components/TopicPage/card'
-import SideBar from '@/components/TopicPage/sideBar'
+import SideBar from '@/components/TopicPage/sidebar'
 
 
 export default function Topic() {

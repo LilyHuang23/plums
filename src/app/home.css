@@ -9,9 +9,15 @@
     linear-gradient(to bottom, rgba(128, 128, 128, 0.432) 1px, transparent 1px);
 }
 
+.form_body {
+  width: 80vw;
+  max-width: 800px;
+  min-width: 60vw;
+  margin: auto;
+}
 
 form {
-    margin: 3rem auto;
+    margin: auto;
     width: 60vh;
     max-width: 70%;
 }
@@ -68,10 +74,10 @@ form > div {
   .submit-btn {
     width: 100%;
     padding: 0.5rem 1rem;
-    border: 1px solid #e34728;
+    border: 1px solid #000000;
     background: #fff;
     margin: 1.2rem 0;
-    color: #e34728;
+
     font-size: 0.9rem;
     font-weight: 700;
     cursor: pointer;
@@ -82,11 +88,13 @@ form > div {
     grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
     grid-gap: 1rem;
   }
+
   .dialog-box > input,
   .dialog-box > select {
     padding: 0.5rem 0.5rem;
     border: 1px solid rgba(0, 0, 0, 0.2);
   }
+
   .dialog-box > input:focus,
   .dialog-box > select:focus {
     outline: none;

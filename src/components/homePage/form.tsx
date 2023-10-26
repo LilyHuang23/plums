@@ -50,6 +50,7 @@ export default function Form()
 
       const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(e);
         console.log(
           formValues.map((val) => {
             return { [val.label]: val.value };
@@ -60,6 +61,16 @@ export default function Form()
     return (
         <div className="form_body bg-wisteria">
             <form onSubmit={handleSubmit}>
+              <div className="input-group">
+                  <label htmlFor="title">Title: </label>
+                  <input type="text" placeholder="Title:" name="title" id="title"/>
+                </div>
+
+                <div className="input-group">
+                  <label htmlFor="description">Description: </label>
+                  <input type="text" placeholder="Title:" />
+                </div>
+
                 {formValues.map((obj, index) => (
                     <Input 
                         key={index}
@@ -78,11 +89,9 @@ export default function Form()
                     ) : (
                     <div className="dialog-box">
                         <input type="text" placeholder="label" ref={inputRef} />
-                        <select ref={selectRef}>
-                            <option value="text">Text</option>
-                            <option value="number">Number</option>
-                            <option value="email">Email</option>
-                            <option value="password">Password</option>
+                        <select ref={selectRef} id={selectRef}>
+                            <option value="text">Notes</option>
+                            <option value="text">Links</option>
                             <option value="file">File Input</option>
                         </select>
                         <button className="add-btn" onClick={handleAddField}>

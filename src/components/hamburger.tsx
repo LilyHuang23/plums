@@ -1,4 +1,8 @@
 import { Fade as Hamburger } from 'hamburger-react'
+import Link from 'next/link';
+
+// https://www.freecodecamp.org/news/dynamic-navigation-in-nextjs/
+
 export default function HamburgerMenu() {
 
     return (
@@ -12,9 +16,10 @@ export default function HamburgerMenu() {
                 }} />
 
             <ul id="menu">
-                <li>Topics</li>
-                <li>Settings</li>
-                <li>Logout</li>
+                <li><Link href="/topics">Topics</Link></li>
+                <li><Link href="/home">Home</Link></li>
+                <li><Link href="/settings">Settings</Link></li>
+                <li><Link href="/logout">Logout</Link></li>
             </ul>
         </div>
 

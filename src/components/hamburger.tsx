@@ -12,7 +12,7 @@ export default function HamburgerMenu() {
                 }} />
 
             <ul id="menu">
-                <li>Topics</li>
+                <li><a href="#">Topics</a></li>
                 <li>Settings</li>
                 <li>Logout</li>
             </ul>

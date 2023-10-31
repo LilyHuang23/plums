@@ -11,7 +11,7 @@ export default function Header() {
             <Link rel="stylesheet" href="#"><Image className="logo" src={logo} alt='Logo' width={120} height={120} /></Link>
             <h1 id='header_title'>PLUMS</h1>
             <HamburgerMenu />
-
+        
         </header>
 
     )

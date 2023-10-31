@@ -10,9 +10,11 @@
 
 
 body {
-  
-  /* background: rgb(200,177,228); */
-  /* background: linear-gradient(180deg, rgba(200,177,228,1) 0%, rgba(47,24,75,1) 100%); */
+
+  overflow-x: hidden;
+  /* background: rgb(200,177,228);
+  background: linear-gradient(180deg, rgba(200,177,228,1) 0%, rgba(47,24,75,1) 100%); */
+
 }
 
 

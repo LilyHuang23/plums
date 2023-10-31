@@ -1,0 +1,11 @@
+{
+    "user" : { "$oid" : "6531591eabce714fc5dfc41f",
+                "username": "user1"                },
+    "topicName" : "string",
+    "description" : "Long string",
+    "notes" : [ "long string 1", "long string 2", "long string 3" ],
+    "attachments" : [ {"fileID" : "_id(123456)"},
+                      {"fileID" : "_id(ajfiekald)"} ],
+    "links" : [ "string", "string", "string" ]
+
+}

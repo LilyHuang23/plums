@@ -18,11 +18,10 @@ const Footer = () => {
         <footer className="bg-amethyst p-5 justify-center">
             <div className="flex justify-center p-5 mx-2.5">
                 
-            <Link href={"#"} className='mx-2.5'>Page</Link>
-            <Link href={"#"} className='mx-2.5'>Page</Link>
+            <Link href={"Topic"} className='mx-2.5'>Page</Link>
             <Link href={"Home"} className='mx-2.5'>PLUMS</Link>
-            <Link href={"#"} className='mx-2.5'>Page</Link>
-            <Link href={"#"} className='mx-2.5'>Page</Link>
+            <Link href={"Setting"} className='mx-2.5'>Page</Link>
+            
             </div>
             <hr></hr>
             <ul className="flex flex-wrap items-center p-5 text-sm font-medium text-gray-300 sm:mb-0 justify-center">

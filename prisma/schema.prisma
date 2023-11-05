@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["mongoDb"]
+}
+
+model topics {
+  id      String @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  userId  String
+  topicName     String
+  description   String
+
+  user    User?  @relation(fields: [userId], references: [id])
+  notes   Notes[] @relation("TopicToNotes", onDelete: CASCADE)
+  links   Link[]  @relation("TopicToLinks", onDelete: CASCADE)
+}
+
+model User {
+  id             String    @id @default(dbgenerated()) @map("_id") @db.ObjectId
+  username       String
+  email          String    @unique
+  password       String
+  birthday       DateTime
+  securityQuestion String
+  accessLevel    String
+  createdAt      DateTime  @default(now())
+}
+
+model notes {
+  id      String @id @default(dbgenerated())  @map("_id") @db.ObjectId
+  content String
+  topicId String
+  topic   Topic @relation("TopicToNotes", fields: [topicId], references: [id])
+}
+ 
+
+model links {
+  id      String @id @default(dbgenerated())   @map("_id")  @db.ObjectId
+  url     String
+  topicId String
+  topic   Topic @relation("TopicToLinks", fields: [topicId], references: [id])
+}

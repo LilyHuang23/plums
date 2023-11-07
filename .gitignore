@@ -36,9 +36,7 @@ yarn-error.log*
 next-env.d.ts
 
 .eslintrc.json
-package-lock.json
 next.config.js
-package.json
 postcss.config.js
 tailwind.config.ts
 topics.json

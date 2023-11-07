@@ -38,7 +38,7 @@ connect.once('open', () => {
     });
 });
 
-/ server-side: routes/image. js
+// server-side: routes/image. js
 // upload middleware initialized with gridfs
 // for storing a single file/ image
 /*
@@ -172,7 +172,7 @@ imageRouter.route('/file/del/: id' )
         gfs.delete(new mongoose. Types. ObjectId(req-params. id) ,
             (err, data) =>{
                 if (err) {
-                return res.status(404) • json({ err: err });
+                return res.status(404).json({ err: err });
                 }
                 
                 res.status(200).json({

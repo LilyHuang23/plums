@@ -1,13 +1,14 @@
-import { NextResponse  } from "next/server"
+import { NextApiHandler } from 'next';
+import {
+    getAllTopics,
+    getTopic,
+    createTopic,
+    updateTopic,
+    deleteTopic
+} from '../../../../prisma/topics'
 
-export async function GET(request: Request) {
-    return new Response("Hello world!", {
-        status: 200,
-    })
-}
-
-export async function POST(request: Request) {
-    return new Response("Hello with POST!", {
-        status: 200,
-    })
+export async function GET (req, res) {
+    console.log("test")
+    const topics = await getAllTopics();
+    return Response.json(topics);
 }

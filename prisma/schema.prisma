@@ -13,11 +13,13 @@ generator client {
 
 model topics {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
-  userId  String
+  userId  String @db.ObjectId
+  user    users?  @relation(fields: [userId], references: [id])
+  
   topicName     String
   description   String
-
-  user    users?  @relation(fields: [userId], references: [id])
+  attachments String[]
+  
   notes   notes[] @relation("TopicToNotes")
   links   links[]  @relation("TopicToLinks")
 }
@@ -37,7 +39,7 @@ model users {
 model notes {
   id      String @id @default(auto())  @map("_id") @db.ObjectId
   content String
-  topicId String
+  topicId String @db.ObjectId
   topic   topics @relation("TopicToNotes", fields: [topicId], references: [id])
 }
  
@@ -45,6 +47,6 @@ model notes {
 model links {
   id      String @id @default(auto())   @map("_id")  @db.ObjectId
   url     String
-  topicId String
+  topicId String @db.ObjectId
   topic   topics @relation("TopicToLinks", fields: [topicId], references: [id])
 }

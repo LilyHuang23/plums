@@ -3,12 +3,10 @@ import prisma from "./prisma";
 // READ
 export const getAllTopics = async () => {
     const topics = await prisma.topics.findMany({});
-    // console.log(topics);
     return topics;
 }
 
 export const getTopic = async id => {
-    console.log("test")
     const topic = await prisma.topics.findUnique({
         where: { id }
     })

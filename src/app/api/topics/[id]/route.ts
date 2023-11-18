@@ -6,10 +6,8 @@ import {
     deleteTopic
 } from '../../../../../prisma/topics'
 
-export async function GET (req, res) {
-    console.log("test")
-    
-    const { id } = req.query;
+export async function GET (req, { params }) {
+    const { id } = params;
     const topic = await getTopic(id);
 
     if (topic) {
@@ -20,15 +18,33 @@ export async function GET (req, res) {
     }
 }
 
-// export default async function handler(req, res) {
-//     try {
-//         switch (req.method) {
-//             case 'GET': {
-//                 const { id } = req.query;
-//                 console.log(id);
-//             }
-//         }
-//     } catch (error) {
-//         return res.status(500).json({ ...error, message: error.message })
-//       }
-// }
+export async function PUT (req, { params }) {
+    const { id } = params;
+    const { topicName, description, newNotes, newLinks, notesToDelete, linksToDelete } = req.body;
+
+    try {
+        const result = await updateTopic(
+            topicName,
+            description,
+            newNotes,
+            newLinks,
+            notesToDelete,
+            linksToDelete
+        )
+
+        return Response.json(result, {status: 200 });
+    } catch (error) {
+        return Response.json({ message: 'Topic not found' }, { status: 404 });
+    }
+}
+
+export async function DELETE(req, res) {
+    const { id } = params;
+
+    try {
+        await deleteTopic(id);
+        return Response.json({message: 'Successfully deleted topic'}, {status: 200 });
+    } catch (error) {
+        return Response.json({ message: 'Error deleting topic' }, { status: 404 });
+    }
+}

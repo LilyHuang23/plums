@@ -97,6 +97,8 @@ export default function Form() {
     <div className="form_body bg-wisteria">
       <form onSubmit={handleSubmit}>
         <div className="input-group">
+        <label htmlFor="title">Topic Name: </label>
+          <input type="text" placeholder="Topic Name:" name="topic" id="topic" />
           <label htmlFor="title">Title: </label>
           <input type="text" placeholder="Title:" name="title" id="title" />
         </div>

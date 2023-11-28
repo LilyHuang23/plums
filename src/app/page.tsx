@@ -15,7 +15,7 @@ export default function Home() {
       <Hero />
       <Feature />
       <Pricing />
-      {/* <Footer /> */}
+      <Footer />
     </main>
   )
 }

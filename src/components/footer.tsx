@@ -18,9 +18,9 @@ const Footer = () => {
         <footer className="bg-amethyst p-5 justify-center">
             <div className="flex justify-center p-5 mx-2.5">
                 
-            <Link href={"Topic"} className='mx-2.5'>Page</Link>
-            <Link href={"Home"} className='mx-2.5'>PLUMS</Link>
-            <Link href={"Setting"} className='mx-2.5'>Page</Link>
+            <Link href={"topics"} className='mx-2.5'>Topics</Link>
+            <Link href={"/"} className='mx-2.5'>PLUMS</Link>
+            <Link href={"home"} className='mx-2.5'>Home</Link>
             
             </div>
             <hr></hr>

@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 import Input from "./input";
 import { document } from "postcss";
+import { FormEvent } from "react";
 
 // https://www.telerik.com/blogs/how-to-programmatically-add-input-fields-react-forms
 // https://codepen.io/arefeh_htmi/pen/mdPYZKJ?editors=1100
@@ -19,17 +20,17 @@ export default function Form() {
   const inputRef = useRef();
   const selectRef = useRef();
 
-  const handleChange = (e, index) => {
+  const handleChange = (e: any, index: any) => {
     const values = [...formValues];
     values[index].value = e.target.value;
     setFormValues(values);
   };
 
-  const handleAddField = (e) => {
+  const handleAddField = (e: any) => {
     e.preventDefault();
     const values = [...formValues];
     values.push({
-      label: inputRef.current?.value || "label",
+      label: inputRef.current!.value || "label",
       type: selectRef.current?.value || "text",
       value: "",
     });
@@ -38,18 +39,18 @@ export default function Form() {
   };
 
 
-  const handleDeleteField = (e, index) => {
+  const handleDeleteField = (e: any, index: any) => {
     const values = [...formValues];
     values.splice(index, 1);
     setFormValues(values);
   }
 
-  const addBtnClick = (e) => {
+  const addBtnClick = (e: any) => {
     e.preventDefault();
     setToggle(true);
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     // console.log(e);
     // console.log(
@@ -84,11 +85,11 @@ export default function Form() {
   };
 
   // Function to convert file to Base64
-  const convertFileToBase64 = (file) => {
+  const convertFileToBase64 = (file: any) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onload = () => resolve(reader.result!.toString().split(',')[1]);
       reader.onerror = (error) => reject(error);
     });
   };

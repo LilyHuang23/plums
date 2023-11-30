@@ -3,19 +3,25 @@
 // import { useTheme } from 'next-themes';
 import Image from 'next/image'
 import Link from 'next/link';
-// import MoonIcon from '/public/images/night-mode.png'
-// import SunIcon from '/public/images/light-mode.png'
-
+// import SunIcon from '/public/images/sun.svg'
+// import MoonIcon from '/public/images/moon.svg'
 import logo from '/public/images/logo.png'
 import HamburgerMenu from './hamburger';
+import { useEffect, useState } from 'react';
 
 export default function Header() {
     // const { systemTheme, theme, setTheme } = useTheme();
+    // const [mounted, setMounted] = useState(false);
+    // useEffect(() => {
+    //     setMounted(true);
+    // }, []);
+    
     // const renderThemeChanger = () => {
     //     const currentTheme = theme === 'system' ? systemTheme : theme;
     //     if (currentTheme === 'dark') {
     //         return (
-    //             <Image src={SunIcon} className="w-7 h-7"
+                
+    //             <SunIcon className="w-7 h-7"
     //                 role="button"
     //                 onClick={() => setTheme('light')}
     //             />

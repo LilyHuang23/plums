@@ -54,6 +54,7 @@ export default function Form()
         console.log("Test 3 {inside Form submit}")
         console.log(e.target.topicName.value);
         console.log(e.target.description.value);
+        
         try {
           const notes = formValues
             .filter((val) => val && val.type === 'Notes' && val.value !== undefined) // Add checks here
@@ -71,12 +72,30 @@ export default function Form()
             links,
             label: 'yourLabel',
         };
-          const response = await axios.post('http://localhost:3000/api/topics', formData); // Change link once deployed
-          console.log(response);
+          // const response = await axios.post('http://localhost:3000/api/topics', formData); // Change link once deployed
+          // console.log(`Response in form: ${JSON.stringify(response)}`);
+          // console.log(formData)
+
+          const res = await fetch('http://localhost:3000/api/topics', {
+            method: 'POST',
+            headers: {
+              'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+              userId: '65500c864a0bbd2a2777f725', // Replace 'userId' with actual userId
+              topicName: e.target.topicName.value,
+              description: e.target.description.value,
+              notes,
+              links,
+              label: 'yourLabel',
+            })
+          })
+
         } catch (error) {
           console.error('Error creating topic:', error);
         }
       };
+
 
     return (
         <div className="form_body bg-wisteria">

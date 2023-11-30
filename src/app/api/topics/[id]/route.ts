@@ -1,4 +1,5 @@
-import { NextApiHandler } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
+
 import {
     getTopic,
     createTopic,

@@ -17,7 +17,8 @@ export const getTopic = async id => {
 export const createTopic = async ( userId, topicName, description, notes, links, label) => {
     const result = await prisma.$transaction(async (prisma) => {
         console.log("Test 3 {Inside createTopic()}");
-        console.log(topicName);
+        console.log( userId, topicName, description, notes, links, label );
+
         // Add topic to topics collection with given data
         const createdTopic = await prisma.topics.create({
             data: {
@@ -29,24 +30,24 @@ export const createTopic = async ( userId, topicName, description, notes, links,
         });
 
         // Add note to notes collection with given data, connect it to current topic being made
-        const createdNotes = await prisma.notes.createMany({
-            data: notes.map((content) => ({
-                content, 
-                topicId: createdTopic.id,
-                label,
-            })),
-        });
+        // const createdNotes = await prisma.notes.createMany({
+        //     data: notes.map((content) => ({
+        //         content, 
+        //         topicId: createdTopic.id,
+        //         label,
+        //     })),
+        // });
 
         // Add link to links collection with given data, connect it to current topic being made
-        const createdLinks = await prisma.links.createMany({
-            data: links.map((url) => ({
-                url,
-                topicId: createdTopic.id,
-                label,
-            }))
-        });
+        // const createdLinks = await prisma.links.createMany({
+        //     data: links.map((url) => ({
+        //         url,
+        //         topicId: createdTopic.id,
+        //         label,
+        //     }))
+        // });
 
-        return {createdTopic, createdNotes, createdLinks };
+        return {createdTopic}; //createdNotes, createdLinks
     })
 
     return result;

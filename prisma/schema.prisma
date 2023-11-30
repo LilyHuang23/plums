@@ -16,8 +16,8 @@ model topics {
   userId  String @db.ObjectId
   user    users?  @relation(fields: [userId], references: [id])
   
-  topicName     String
-  description   String
+  topicName     String?
+  description   String?
   attachments String[]
   label       String?
   

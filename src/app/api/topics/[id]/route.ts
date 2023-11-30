@@ -20,7 +20,7 @@ export async function GET (req, { params }) {
 
 export async function PUT (req, { params }) {
     const { id } = params;
-    const { topicName, description, newNotes, newLinks, notesToDelete, linksToDelete } = req.body;
+    const { topicName, description, newNotes, newLinks, notesToDelete, linksToDelete, label } = req.body;
 
     try {
         const result = await updateTopic(
@@ -29,7 +29,8 @@ export async function PUT (req, { params }) {
             newNotes,
             newLinks,
             notesToDelete,
-            linksToDelete
+            linksToDelete,
+            label,
         )
 
         return Response.json(result, {status: 200 });

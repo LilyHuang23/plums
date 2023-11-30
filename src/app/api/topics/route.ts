@@ -14,10 +14,14 @@ export async function GET (req, res) {
 }
 
 export async function POST (req, res) {
-    const { userId, topicName, description, notes, links } = req.body;
+    console.log("Test 2 Inside POST {route.ts}")
+    console.log(res);
+    // console.log(req);
+    const { userId, topicName, description, notes, links, label } = req.body;
+    console.log(topicName);
 
     try {
-        const topic = createTopic( userId, topicName, description, notes, links);
+        const topic = createTopic( userId, topicName, description, notes, links, label);
         return Response.json(topic);
     } catch (error) {
         return Response.json({ error: 'Error creating topic.'})

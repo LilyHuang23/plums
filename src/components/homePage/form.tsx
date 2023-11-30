@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef } from "react";
 import Input from "./input";
+import axios from "axios";
 
 // https://www.telerik.com/blogs/how-to-programmatically-add-input-fields-react-forms
 // https://codepen.io/arefeh_htmi/pen/mdPYZKJ?editors=1100
@@ -48,27 +49,46 @@ export default function Form()
         setToggle(true);
       }
 
-      const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(e);
-        console.log(
-          formValues.map((val) => {
-            return { [val.label]: val.value };
-          })
-        );
+        console.log("Test 3 {inside Form submit}")
+        console.log(e.target.topicName.value);
+        console.log(e.target.description.value);
+        try {
+          const notes = formValues
+            .filter((val) => val && val.type === 'Notes' && val.value !== undefined) // Add checks here
+            .map((val) => val.value);
+
+          const links = formValues
+            .filter((val) => val && val.type === 'Links' && val.value !== undefined) // Add checks here
+            .map((val) => val.value);
+
+          const formData = {
+            userId: '65500c864a0bbd2a2777f725', // Replace 'userId' with actual userId
+            topicName: e.target.topicName.value,
+            description: e.target.description.value,
+            notes,
+            links,
+            label: 'yourLabel',
+        };
+          const response = await axios.post('http://localhost:3000/api/topics', formData); // Change link once deployed
+          console.log(response);
+        } catch (error) {
+          console.error('Error creating topic:', error);
+        }
       };
 
     return (
         <div className="form_body bg-wisteria">
             <form onSubmit={handleSubmit}>
               <div className="input-group">
-                  <label htmlFor="title">Title: </label>
-                  <input type="text" placeholder="Title:" name="title" id="title"/>
+                  <label htmlFor="title">Topic Name: </label>
+                  <input type="text" placeholder="Title:" name="topicName" id="title"/>
                 </div>
 
                 <div className="input-group">
                   <label htmlFor="description">Description: </label>
-                  <input type="text" placeholder="Title:" />
+                  <input type="text" placeholder="Title:" name="description" id="description"/>
                 </div>
 
                 {formValues.map((obj, index) => (

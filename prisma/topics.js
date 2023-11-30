@@ -14,15 +14,17 @@ export const getTopic = async id => {
 }
 
 // CREATE 
-export const createTopic = async ( userId, topicName, description, notes, links) => {
+export const createTopic = async ( userId, topicName, description, notes, links, label) => {
     const result = await prisma.$transaction(async (prisma) => {
-
+        console.log("Test 3 {Inside createTopic()}");
+        console.log(topicName);
         // Add topic to topics collection with given data
         const createdTopic = await prisma.topics.create({
             data: {
                 topicName,
                 description, 
                 userId,
+                label,
             },
         });
 
@@ -31,6 +33,7 @@ export const createTopic = async ( userId, topicName, description, notes, links)
             data: notes.map((content) => ({
                 content, 
                 topicId: createdTopic.id,
+                label,
             })),
         });
 
@@ -38,19 +41,19 @@ export const createTopic = async ( userId, topicName, description, notes, links)
         const createdLinks = await prisma.links.createMany({
             data: links.map((url) => ({
                 url,
-                t,opicId: createdTopic.id,
+                topicId: createdTopic.id,
+                label,
             }))
         });
 
         return {createdTopic, createdNotes, createdLinks };
     })
 
-    console.log(result)
     return result;
 }
 
 // UPDATE
-export const updateTopic = async (id, topicName, description, newNotes, newLinks, notesToDelete, linksToDelete) => {
+export const updateTopic = async (id, topicName, description, newNotes, newLinks, notesToDelete, linksToDelete, label) => {
 
     const result = await prisma.$transaction(async (prisma) => {
         // Udate topic information
@@ -59,6 +62,7 @@ export const updateTopic = async (id, topicName, description, newNotes, newLinks
             data: {
                 topicName, 
                 description,
+                label
             },
         });
 
@@ -67,6 +71,7 @@ export const updateTopic = async (id, topicName, description, newNotes, newLinks
             where: {
                 topicId: id,
                 id: { in: notesToDelete },
+                label,
             },
         });
 
@@ -91,6 +96,7 @@ export const updateTopic = async (id, topicName, description, newNotes, newLinks
             data: newLinks.map((url) => ({
                 url, 
                 topicId: updatedTopic.id,
+                label,
             })),
         })
 

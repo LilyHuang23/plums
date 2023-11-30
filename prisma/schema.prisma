@@ -19,6 +19,7 @@ model topics {
   topicName     String
   description   String
   attachments String[]
+  label       String?
   
   notes   notes[] @relation("TopicToNotes")
   links   links[]  @relation("TopicToLinks")
@@ -34,6 +35,7 @@ model users {
   accessLevel    String
   createdAt      DateTime  @default(now())
   topics   topics[]
+  label          String?
 }
 
 model notes {
@@ -41,6 +43,7 @@ model notes {
   content String
   topicId String @db.ObjectId
   topic   topics @relation("TopicToNotes", fields: [topicId], references: [id])
+  label         String?
 }
  
 
@@ -49,4 +52,5 @@ model links {
   url     String
   topicId String @db.ObjectId
   topic   topics @relation("TopicToLinks", fields: [topicId], references: [id])
+  label         String?
 }

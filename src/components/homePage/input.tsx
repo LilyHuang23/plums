@@ -7,13 +7,13 @@ export default function Input({ objValue, onChange, index, deleteField }) {
         <div className="input-group">
             <label htmlFor={label}>{label}</label>
             <div className="input">
-                <input type={type || "text" } 
+                <input type={type} 
                        id={label}
                        value={value || ""} 
                        onChange={(e) => onChange(e, index)}
                 />
             </div>
-            <div onClick={(e) => deleteField(e, index)}>X</div>
+            <button className="" onClick={(e) => deleteField(e, index)}>Delete</button>
         </div>
     )
 }

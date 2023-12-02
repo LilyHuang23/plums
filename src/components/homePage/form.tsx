@@ -1,7 +1,7 @@
 'use client'
 import { useState, useRef } from "react";
 import Input from "./input";
-import axios from "axios";
+import { toast } from "react-toastify";
 
 // https://www.telerik.com/blogs/how-to-programmatically-add-input-fields-react-forms
 // https://codepen.io/arefeh_htmi/pen/mdPYZKJ?editors=1100
@@ -51,32 +51,17 @@ export default function Form()
 
       const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Test 3 {inside Form submit}")
-        console.log(e.target.topicName.value);
-        console.log(e.target.description.value);
         
         try {
           const notes = formValues
-            .filter((val) => val && val.type === 'Notes' && val.value !== undefined) // Add checks here
+            .filter((val) => val && val.type === 'notes')
             .map((val) => val.value);
 
           const links = formValues
-            .filter((val) => val && val.type === 'Links' && val.value !== undefined) // Add checks here
+            .filter((val) => val && val.type === 'links')
             .map((val) => val.value);
 
-          const formData = {
-            userId: '65500c864a0bbd2a2777f725', // Replace 'userId' with actual userId
-            topicName: e.target.topicName.value,
-            description: e.target.description.value,
-            notes,
-            links,
-            label: 'yourLabel',
-        };
-          // const response = await axios.post('http://localhost:3000/api/topics', formData); // Change link once deployed
-          // console.log(`Response in form: ${JSON.stringify(response)}`);
-          // console.log(formData)
-
-          const res = await fetch('http://localhost:3000/api/topics', {
+          const res = await fetch('http://localhost:3000/api/topics', { // Change link once deployed
             method: 'POST',
             headers: {
               'Content-type': 'application/json',
@@ -87,27 +72,46 @@ export default function Form()
               description: e.target.description.value,
               notes,
               links,
-              label: 'yourLabel',
+              label: 'Label',
             })
           })
 
+          // Toast Pop-up notification
+          toast.success('Form submitted successfully!', {
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 3000,
+            closeOnClick: true,
+            draggable: true,
+          });
+
+          // Reset Form
+          setFormValues([]);
+
+
         } catch (error) {
           console.error('Error creating topic:', error);
+
+          toast.error('Error submitting form', {
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 3000,
+            closeOnClick: true,
+            draggable: true,
+          });
         }
       };
 
 
     return (
         <div className="form_body bg-wisteria">
-            <form onSubmit={handleSubmit}>
+            <form className="homeForm" onSubmit={handleSubmit}>
               <div className="input-group">
                   <label htmlFor="title">Topic Name: </label>
-                  <input type="text" placeholder="Title:" name="topicName" id="title"/>
+                  <input type="text" placeholder="Title:" name="topicName" id="title" required/>
                 </div>
 
                 <div className="input-group">
                   <label htmlFor="description">Description: </label>
-                  <input type="text" placeholder="Title:" name="description" id="description"/>
+                  <input type="text" placeholder="Title:" name="description" id="description" required/>
                 </div>
 
                 {formValues.map((obj, index) => (
@@ -129,8 +133,8 @@ export default function Form()
                     <div className="dialog-box">
                         <input type="text" placeholder="label" ref={inputRef} />
                         <select ref={selectRef} id={selectRef}>
-                            <option value="text">Notes</option>
-                            <option value="text">Links</option>
+                            <option value="notes">Notes</option>
+                            <option value="links">Links</option>
                             <option value="file">File Input</option>
                         </select>
                         <button className="add-btn" onClick={handleAddField}>

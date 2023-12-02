@@ -3,18 +3,11 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import logo from '/public/images/logo.png'
 
+import React from 'react';
 
-
-const Card = () => {
+const Card = ({ topicName, createdDate }) => {
     return (
-        // <div className="justify-center border-4 rounded-full w-10
-        // h-26">
-        //     <Image src={logo} alt="Topic" className="rounded-t-md" />
-        //         <div className="padding: 2px 16px;">
-        //             <h4><b>Topic</b></h4>
-        //             <p>Create: 10/21/2023</p>
-        //         </div>
-        // </div>
+
         <div className="ml-10 pt-0 pl-10 flex">
             <div className="scale-90 rounded-full text-center border-black border-2 bg-wisteria w-80 h-80">
                 <div className="text-lg mt-10">

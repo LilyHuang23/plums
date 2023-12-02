@@ -2,7 +2,12 @@ import prisma from "./prisma";
 
 // READ
 export const getAllTopics = async () => {
-    const topics = await prisma.topics.findMany({});
+    const topics = await prisma.topics.findMany({
+        include: {
+            notes: true,
+            links: true, 
+        },
+    });
     return topics;
 }
 
@@ -16,8 +21,6 @@ export const getTopic = async id => {
 // CREATE 
 export const createTopic = async ( userId, topicName, description, notes, links, label) => {
     const result = await prisma.$transaction(async (prisma) => {
-        console.log("Test 3 {Inside createTopic()}");
-        console.log( userId, topicName, description, notes, links, label );
 
         // Add topic to topics collection with given data
         const createdTopic = await prisma.topics.create({
@@ -30,22 +33,26 @@ export const createTopic = async ( userId, topicName, description, notes, links,
         });
 
         // Add note to notes collection with given data, connect it to current topic being made
-        // const createdNotes = await prisma.notes.createMany({
-        //     data: notes.map((content) => ({
-        //         content, 
-        //         topicId: createdTopic.id,
-        //         label,
-        //     })),
-        // });
+        if (notes && notes.length > 0) { 
+            const createdNotes = await prisma.notes.createMany({
+                data: notes.map((content) => ({
+                    content, 
+                    topicId: createdTopic.id,
+                    label,
+                })),
+            });
+        }
 
+        if (links && links.length > 0) {
         // Add link to links collection with given data, connect it to current topic being made
-        // const createdLinks = await prisma.links.createMany({
-        //     data: links.map((url) => ({
-        //         url,
-        //         topicId: createdTopic.id,
-        //         label,
-        //     }))
-        // });
+            const createdLinks = await prisma.links.createMany({
+                data: links.map((url) => ({
+                    url,
+                    topicId: createdTopic.id,
+                    label,
+                }))
+            });
+        }
 
         return {createdTopic}; //createdNotes, createdLinks
     })

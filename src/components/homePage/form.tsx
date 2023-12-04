@@ -126,12 +126,36 @@ export default function Form() {
                     <input type="text" placeholder="Title:" />
                 </div>
                 <div className="input-group">
-                    <label htmlFor="upload">Upload A File:
+                    <label htmlFor="upload">Upload a Picture:
                         <input
                             id="upload"
                             type="file"
                             accept="image/*"
+                            placeholder="Upload A Picture:"
+                            onChange={convertFileToBase64}
+                        />
+
+                    </label>
+                </div>
+                <div className="input-group">
+                    <label htmlFor="upload">Upload a File:
+                        <input
+                            id="upload"
+                            type="file"
+                            accept=".doc, .docx"
                             placeholder="Upload A File:"
+                            onChange={convertFileToBase64}
+                        />
+
+                    </label>
+                    </div>
+                    <div className="input-group">
+                    <label htmlFor="upload">Upload a PDF/ Text File:
+                        <input
+                            id="upload"
+                            type="file"
+                            accept=".pdf, .txt"
+                            placeholder="Upload a PDF/ Text File:"
                             onChange={convertFileToBase64}
                         />
 

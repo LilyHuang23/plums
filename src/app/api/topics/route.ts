@@ -1,13 +1,31 @@
-import { NextResponse  } from "next/server"
+import { NextApiHandler } from 'next';
+import { NextResponse } from 'next/server';
 
-export async function GET(request: Request) {
-    return new Response("Hello world!", {
-        status: 200,
-    })
+import {
+    getAllTopics,
+    getTopic,
+    createTopic,
+    updateTopic,
+    deleteTopic
+} from '../../../../prisma/topics'
+
+// Gets list of all topics 
+export async function GET (req, res) {
+    const topics = await getAllTopics();
+    return Response.json(topics);
 }
 
-export async function POST(request: Request) {
-    return new Response("Hello with POST!", {
-        status: 200,
-    })
+export async function POST (req, { params }) {
+    
+    const body = await req.json();
+    
+    try {
+        const { userId, topicName, description, notes, links, label } = body;
+        
+        const topic = createTopic( userId, topicName, description, notes, links, label);
+        return NextResponse.json(topic);
+    } catch (error) {
+        return NextResponse.json({ error: 'Error creating topic.'})
+    }
 }
+

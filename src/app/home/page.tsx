@@ -1,9 +1,9 @@
-import '@/app/home.css'
+import './home.css'
 
 import Image from 'next/image'
-import Footer from '@/components/footer'
-import Header from '@/components/header'
-import Form from '@/components/homePage/form'
+import Header from '../../components/header'
+
+// import Form from '../../components/homePage/form'
 
 // Toast Notifications and Popups
 import { ToastContainer } from 'react-toastify';

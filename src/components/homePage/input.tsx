@@ -1,7 +1,7 @@
-import React from "react";
+// import React from "react";
 
-export default function Input({ objValue, onChange, index, deleteField }) {
-    const {label, type, value} = objValue;
+// export default function Input({ objValue, onChange, index, deleteField }) {
+//     const {label, type, value} = objValue;
 
     return (
         <div className="input-group">

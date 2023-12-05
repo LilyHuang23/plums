@@ -7,9 +7,6 @@ export default function Input({ objValue, onChange, index, deleteField }) {
     const [base64, setBase64] = useState<any | any>(null);
     const [image, setImage] = useState(""); 
 
-
-
-    
     const convertFileToBase64 = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fileInput = e.target.files && e.target.files[0];
         if (fileInput) {

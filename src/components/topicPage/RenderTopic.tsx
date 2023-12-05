@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { useParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function RenderTopic() {
     const [topics, setTopics ] = useState([]);
-    const { topicId } = useParams();
 
-    
+    const searchParams = usePathname();
+    const id = searchParams?.split('/').pop();
+    console.log(id);
+
     useEffect(() => {
-     
-        // const [topicData, setTopicData] = useState(null);
-
         const fetchTopic = async () => {
-            console.log(topicId)
             try {
-                const response = await fetch(`http://localhost:3000/api/topics/${topicId}`, {
+                const response = await fetch(`http://localhost:3000/api/topics/${id}`, {
                     method: 'GET',
                     headers: {
                         'Content-type': 'application/json'

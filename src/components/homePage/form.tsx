@@ -117,93 +117,93 @@ export default function Form() {
 
   }
 
-<!-- export default function Form()
-{
-    const [formValues, setFormValues] = useState<FormValue[]>([]);
-    const [toggle, setToggle] = useState(false);
+// export default function Form()
+// {
+//     const [formValues, setFormValues] = useState<FormValue[]>([]);
+//     const [toggle, setToggle] = useState(false);
 
-    const inputRef = useRef();
-    const selectRef = useRef();
+//     const inputRef = useRef();
+//     const selectRef = useRef();
 
-    const handleChange = (e, index) => {
-        const values = [...formValues];
-        values[index].value = e.target.value;
-        setFormValues(values);
-      };
+//     const handleChange = (e, index) => {
+//         const values = [...formValues];
+//         values[index].value = e.target.value;
+//         setFormValues(values);
+//       };
     
-      const handleAddField = (e) => {
-        e.preventDefault();
-        const values = [...formValues];
-        values.push({
-          label: inputRef.current?.value || "label",
-          type: selectRef.current?.value || "text",
-          value: "",
-        });
-        setFormValues(values);
-        setToggle(false);
-      };
+//       const handleAddField = (e) => {
+//         e.preventDefault();
+//         const values = [...formValues];
+//         values.push({
+//           label: inputRef.current?.value || "label",
+//           type: selectRef.current?.value || "text",
+//           value: "",
+//         });
+//         setFormValues(values);
+//         setToggle(false);
+//       };
 
-      const handleDeleteField = (e, index) => {
-        const values = [...formValues];
-        values.splice(index, 1);
-        setFormValues(values);
-      }
+//       const handleDeleteField = (e, index) => {
+//         const values = [...formValues];
+//         values.splice(index, 1);
+//         setFormValues(values);
+//       }
 
-      const addBtnClick = (e) => {
-        e.preventDefault();
-        setToggle(true);
-      }
+//       const addBtnClick = (e) => {
+//         e.preventDefault();
+//         setToggle(true);
+//       }
 
-      const handleSubmit = async (e) => {
-        e.preventDefault();
+//       const handleSubmit = async (e) => {
+//         e.preventDefault();
         
-        try {
-          const notes = formValues
-            .filter((val) => val && val.type === 'notes')
-            .map((val) => val.value);
+//         try {
+//           const notes = formValues
+//             .filter((val) => val && val.type === 'notes')
+//             .map((val) => val.value);
 
-          const links = formValues
-            .filter((val) => val && val.type === 'links')
-            .map((val) => val.value);
+//           const links = formValues
+//             .filter((val) => val && val.type === 'links')
+//             .map((val) => val.value);
 
-          const res = await fetch('http://localhost:3000/api/topics', { // Change link once deployed
-            method: 'POST',
-            headers: {
-              'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-              userId: '65500c864a0bbd2a2777f725', // Replace 'userId' with actual userId
-              topicName: e.target.topicName.value,
-              description: e.target.description.value,
-              notes,
-              links,
-              label: 'Label',
-            })
-          })
+//           const res = await fetch('http://localhost:3000/api/topics', { // Change link once deployed
+//             method: 'POST',
+//             headers: {
+//               'Content-type': 'application/json',
+//             },
+//             body: JSON.stringify({
+//               userId: '65500c864a0bbd2a2777f725', // Replace 'userId' with actual userId
+//               topicName: e.target.topicName.value,
+//               description: e.target.description.value,
+//               notes,
+//               links,
+//               label: 'Label',
+//             })
+//           })
 
-          // Toast Pop-up notification
-          toast.success('Form submitted successfully!', {
-            position: toast.POSITION.BOTTOM_CENTER,
-            autoClose: 3000,
-            closeOnClick: true,
-            draggable: true,
-          });
+//           // Toast Pop-up notification
+//           toast.success('Form submitted successfully!', {
+//             position: toast.POSITION.BOTTOM_CENTER,
+//             autoClose: 3000,
+//             closeOnClick: true,
+//             draggable: true,
+//           });
 
-          // Reset Form
-          setFormValues([]);
+//           // Reset Form
+//           setFormValues([]);
 
 
-        } catch (error) {
-          console.error('Error creating topic:', error);
+//         } catch (error) {
+//           console.error('Error creating topic:', error);
 
-          toast.error('Error submitting form', {
-            position: toast.POSITION.BOTTOM_CENTER,
-            autoClose: 3000,
-            closeOnClick: true,
-            draggable: true,
-          });
-        }
-      }; -->
+//           toast.error('Error submitting form', {
+//             position: toast.POSITION.BOTTOM_CENTER,
+//             autoClose: 3000,
+//             closeOnClick: true,
+//             draggable: true,
+//           });
+//         }
+//       }; 
 
 
     return (
@@ -258,10 +258,10 @@ export default function Form() {
                     </label>
                 </div>
 
-                {formValues.map((obj, index) => (
+                {/* {formValues.map((obj, index) => (
                     <Input
 
-<!--             <form className="homeForm" onSubmit={handleSubmit}>
+            <form className="homeForm" onSubmit={handleSubmit}>
               <div className="input-group">
                   <label htmlFor="title">Topic Name: </label>
                   <input type="text" placeholder="Title:" name="topicName" id="title" required/>
@@ -270,23 +270,23 @@ export default function Form() {
                 <div className="input-group">
                   <label htmlFor="description">Description: </label>
                   <input type="text" placeholder="Title:" name="description" id="description" required/>
-                </div>
+                </div> */}
 
-                {formValues.map((obj, index) => (
-                    <Input  -->
+                {/* {formValues.map((obj, index) => (
+                    <Input 
 
                         key={index}
                         objValue={obj}
                         onChange={handleChange}
                         index={index}
                         deleteField={handleDeleteField}
-                    />
+                    /> */}
 
 
-                    // Make image uploading onChange rather than onSubmit
+                    {/* // Make image uploading onChange rather than onSubmit
                     // Set up base64 outside of handle submit
 
-                ))}
+                ))} */}
                 {!toggle ? (
                     <div className="center">
                         <button className="add-btn" onClick={addBtnClick}>
@@ -308,7 +308,7 @@ export default function Form() {
                     </div>
                 )}
 
-<!--                         Add new
+{/* <!--                         Add new
                         </button>
                     </div>
                     ) : (
@@ -323,7 +323,7 @@ export default function Form() {
                         Add
                         </button>
                     </div>
-                    )}-->
+                    )}--> */}
 
                 <button type="submit" className="submit-btn">Submit</button>
             </form>
@@ -331,5 +331,5 @@ export default function Form() {
     )
 
 
-}
+
 

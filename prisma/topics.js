@@ -13,15 +13,18 @@ export const getAllTopics = async () => {
 
 export const getTopic = async id => {
     const topic = await prisma.topics.findUnique({
-        where: { id }
+        where: { id },
+        include: {
+            notes: true,
+            links: true, 
+        },
     })
     return topic;
 }
 
 // CREATE 
-export const createTopic = async ( userId, topicName, description, notes, links, label) => {
+export const createTopic = async ( userId, topicName, description, notes, links, label, attachments) => {
     const result = await prisma.$transaction(async (prisma) => {
-
         // Add topic to topics collection with given data
         const createdTopic = await prisma.topics.create({
             data: {
@@ -29,6 +32,7 @@ export const createTopic = async ( userId, topicName, description, notes, links,
                 description, 
                 userId,
                 label,
+                attachments,
             },
         });
 
@@ -54,7 +58,7 @@ export const createTopic = async ( userId, topicName, description, notes, links,
             });
         }
 
-        return {createdTopic}; //createdNotes, createdLinks
+        return {createdTopic}; //, createdNotes, createdLinks
     })
 
     return result;

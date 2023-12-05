@@ -16,13 +16,14 @@ export async function GET (req, res) {
 }
 
 export async function POST (req, { params }) {
-    
+
     const body = await req.json();
     
     try {
-        const { userId, topicName, description, notes, links, label } = body;
-        
-        const topic = createTopic( userId, topicName, description, notes, links, label);
+        const { userId, topicName, description, notes, links, label, attachments } = body;
+
+
+        const topic = createTopic( userId, topicName, description, notes, links, label, attachments);
         return NextResponse.json(topic);
     } catch (error) {
         return NextResponse.json({ error: 'Error creating topic.'})

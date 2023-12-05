@@ -1,6 +1,6 @@
 // import React from "react";
 
-export default function Input({ objValue, onChange, index, deleteField }) {
+export default function Input({ objValue, onChange, index, deleteField, accepts }) {
     const {label, type, value} = objValue;
 
     return (
@@ -10,6 +10,7 @@ export default function Input({ objValue, onChange, index, deleteField }) {
                 <input type={type} 
                        id={label}
                        value={value || ""} 
+                       accept={accepts}
                        onChange={(e) => onChange(e, index)}
                 />
             </div>

@@ -15,6 +15,8 @@ interface FormValue {
     label: string;
     type: string;
     value: string;
+    accepts: string;
+  }
 
 }
 
@@ -23,6 +25,7 @@ export default function Form() {
     const [toggle, setToggle] = useState(false);
     const [base64, setBase64] = useState<any | any>(null);
     const [image, setImage] = useState("");
+
     const inputRef = useRef();
     const selectRef = useRef();
 
@@ -35,11 +38,15 @@ export default function Form() {
     const handleAddField = (e: any) => {
         e.preventDefault();
         const values = [...formValues];
+        const acceptsValue = selectRef.current?.selectedOptions[0].getAttribute('data-accepts') || '';
+
         values.push({
-            label: inputRef.current!.value || "label",
-            type: selectRef.current?.value || "text",
-            value: "",
+          label: inputRef.current?.value || "label",
+          type: selectRef.current?.value || "text",
+          value: "",
+          accepts: acceptsValue,
         });
+
         setFormValues(values);
         setToggle(false);
     };
@@ -69,7 +76,22 @@ export default function Form() {
         setFormValues(values);
     }
 
+      const convertFileToBase64 = (e: React.ChangeEvent<HTMLInputElement>) => {
+        console.log("hello")
+        const fileInput = e.target.files && e.target.files[0];
+        if (fileInput) {
+            setImage(fileInput)
+            const reader = new FileReader();
+            reader.readAsDataURL(fileInput);
+            reader.onload = () => {
+                setBase64(reader.result)
+                console.log(reader.result)
+            }
+        }
+    }
+
     const addBtnClick = (e: any) => {
+
         e.preventDefault();
         setToggle(true);
     }
@@ -314,11 +336,13 @@ export default function Form() {
                     ) : (
                     <div className="dialog-box">
                         <input type="text" placeholder="label" ref={inputRef} />
-                        <select ref={selectRef} id={selectRef}>
-                            <option value="notes">Notes</option>
-                            <option value="links">Links</option>
-                            <option value="file">File Input</option>
-                        </select>
+                          <select ref={selectRef} id={selectRef}>
+                              <option value="notes" data-accepts="">Notes</option>
+                              <option value="links" data-accepts="">Links</option>
+                              <option value="file" data-accepts="image/*">Image Input</option>
+                              <option value="file" data-accepts=".doc, .docx">Word Doc</option>
+                              <option value="file" data-accepts=".pdf, .txt">PDF Input</option>
+                          </select>
                         <button className="add-btn" onClick={handleAddField}>
                         Add
                         </button>
@@ -330,6 +354,4 @@ export default function Form() {
         </div>
     )
 
-
-
-
+}

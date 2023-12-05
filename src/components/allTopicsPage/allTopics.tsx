@@ -53,6 +53,7 @@ export default function AllTopics() {
             {topics.map((topic) => (
               <Card
                 key={topic.id}
+                topicId={topic.id}
                 topicName={topic.topicName}
               />
             ))}

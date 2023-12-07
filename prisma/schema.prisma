@@ -18,11 +18,11 @@ model topics {
   
   topicName     String?
   description   String?
-  attachments String[]
   label       String?
   
   notes   notes[] @relation("TopicToNotes")
   links   links[]  @relation("TopicToLinks")
+  attachments attachments[] @relation("TopicToAttachments")
 }
 
 model users {
@@ -43,6 +43,14 @@ model notes {
   content String
   topicId String @db.ObjectId
   topic   topics @relation("TopicToNotes", fields: [topicId], references: [id])
+  label         String?
+}
+
+model attachments {
+  id      String @id @default(auto())  @map("_id") @db.ObjectId
+  content String
+  topicId String @db.ObjectId
+  topic   topics @relation("TopicToAttachments", fields: [topicId], references: [id])
   label         String?
 }
  

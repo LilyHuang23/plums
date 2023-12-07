@@ -3,10 +3,10 @@ import prisma from "./prisma";
 // READ
 export const getAllTopics = async () => {
     const topics = await prisma.topics.findMany({
-        include: {
-            notes: true,
-            links: true, 
-        },
+        // include: {
+        //     notes: true,
+        //     links: true, 
+        // },
     });
     return topics;
 }
@@ -17,6 +17,7 @@ export const getTopic = async id => {
         include: {
             notes: true,
             links: true, 
+            attachments: true,
         },
     })
     return topic;
@@ -32,7 +33,6 @@ export const createTopic = async ( userId, topicName, description, notes, links,
                 description, 
                 userId,
                 label,
-                attachments,
             },
         });
 
@@ -58,6 +58,17 @@ export const createTopic = async ( userId, topicName, description, notes, links,
             });
         }
 
+        if (attachments && attachments.length > 0) {
+            // Add link to links collection with given data, connect it to current topic being made
+                const createdAttachments = await prisma.attachments.createMany({
+                    data: attachments.map((content) => ({
+                        content,
+                        topicId: createdTopic.id,
+                        label,
+                    }))
+                });
+            }
+
         return {createdTopic}; //, createdNotes, createdLinks
     })
 
@@ -65,10 +76,19 @@ export const createTopic = async ( userId, topicName, description, notes, links,
 }
 
 // UPDATE
-export const updateTopic = async (id, topicName, description, newNotes, newLinks, notesToDelete, linksToDelete, label) => {
+export const updateTopic = async (id, 
+                                  topicName, 
+                                  description,
+                                  noteId, updatedNoteContent, newNotes, notesToDelete, 
+                                  linkId, updatedLinkContent, newLinks, linksToDelete, 
+                                  label, attachments) => {
+    console.log("TEST #2 - PRISMA.JS")
 
     const result = await prisma.$transaction(async (prisma) => {
         // Udate topic information
+        console.log("TEST");
+
+        // Update Topics
         const updatedTopic = await prisma.topics.update({
             where: { id },
             data: {
@@ -78,41 +98,59 @@ export const updateTopic = async (id, topicName, description, newNotes, newLinks
             },
         });
 
+        console.log(newNotes);
+        console.log(notesToDelete);
+
+        // Add update for notes
+
         // Delete specified notes the user wants deleted
-        await prisma.notes.deleteMany({
-            where: {
-                topicId: id,
-                id: { in: notesToDelete },
-                label,
-            },
-        });
+        if (notesToDelete && notesToDelete.length > 0) {
+            await prisma.notes.deleteMany({
+                where: {
+                    topicId: id,
+                    id: { in: notesToDelete },
+                    label,
+                },
+            });
+        }
 
         // Add new notes
-        const createdNotes = await prisma.notes.createMany({
-            data: newNotes.map((content) => ({
-                content,
-                topicId: updatedTopic.id,
-            })),
-        });
+        if (newNotes && newNotes.length > 0) {
+            await prisma.notes.createMany({
+                data: newNotes.map((content) => ({
+                    content,
+                    topicId: updatedTopic.id,
+                })),
+            });
+        }
+
+
+        // Add update for notes
 
         
-        // Repeat the process with links
-        await prisma.links.deleteMany({
-            where: {
-                topicId: id,
-                id: { in: linksToDelete },
-            },
-        });
+        // Delete anything in LinksToDelete
+        if (linksToDelete && linksToDelete.length > 0) {
+            await prisma.links.deleteMany({
+                where: {
+                    topicId: id,
+                    id: { in: linksToDelete },
+                },
+            });
+        }
 
-        const createdLinks = await prisma.links.createMany({
-            data: newLinks.map((url) => ({
-                url, 
-                topicId: updatedTopic.id,
-                label,
-            })),
-        })
+        // Add any new links
+        if (newLinks && newLinks.length > 0) {
+            const createdLinks = await prisma.links.createMany({
+                data: newLinks.map((url) => ({
+                    url, 
+                    topicId: updatedTopic.id,
+                    label,
+                })),
+            })
+        }
 
-        return { updatedTopic, createdNotes, createdLinks };
+
+        return { updatedTopic };
     });
 
     return result;
@@ -121,20 +159,25 @@ export const updateTopic = async (id, topicName, description, newNotes, newLinks
 // DELETE
 export const deleteTopic = async (id) => {
     const result = await prisma.$transaction(async (prisma) => {
-        
-        // Delete associated topic
-        await prisma.topics.delete({
-            where: { id },
-        })
+        console.log('test2')
 
         // Delete associated notes
         await prisma.notes.deleteMany({
             where: { topicId: id },
-        })
+        });
 
         // Delete associated links
         await prisma.links.deleteMany({
             where: {topicId: id },
+        });
+
+        await prisma.attachments.deleteMany({
+            where: { topicId: id },
+        });
+
+        // Delete associated topic
+        await prisma.topics.delete({
+            where: { id },
         });
     });
 

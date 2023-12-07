@@ -12,7 +12,6 @@ export async function GET (req, { params }) {
     const topic = await getTopic(id);
 
     if (topic) {
-        console.log("test");
         return Response.json(topic, { status: 200 });
     } else {
         return Response.json({ message: 'Topic not found' }, { status: 404 });
@@ -20,11 +19,23 @@ export async function GET (req, { params }) {
 }
 
 export async function PUT (req, { params }) {
+
     const { id } = params;
-    const { topicName, description, newNotes, newLinks, notesToDelete, linksToDelete, label } = req.body;
+    const body = await req.json();
+
+    const { topicName, 
+            description, 
+            newNotes, 
+            newLinks, 
+            notesToDelete, 
+            linksToDelete, 
+            label, 
+            attachments } = body;
+
 
     try {
         const result = await updateTopic(
+            id,
             topicName,
             description,
             newNotes,
@@ -32,19 +43,26 @@ export async function PUT (req, { params }) {
             notesToDelete,
             linksToDelete,
             label,
+            attachments
         )
+
+        
 
         return Response.json(result, {status: 200 });
     } catch (error) {
+        console.log("TEST");
         return Response.json({ message: 'Topic not found' }, { status: 404 });
     }
 }
 
-export async function DELETE(req, res) {
+export async function DELETE(req, { params }) {
     const { id } = params;
 
+    console.log('test1')
+    console.log('Deleting topic with ID:', id);
+    await deleteTopic(id);
+    
     try {
-        await deleteTopic(id);
         return Response.json({message: 'Successfully deleted topic'}, {status: 200 });
     } catch (error) {
         return Response.json({ message: 'Error deleting topic' }, { status: 404 });

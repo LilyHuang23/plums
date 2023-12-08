@@ -124,7 +124,7 @@ padding-top: 10px;
 }
 
 /* Home page style */
-.homePage {
+/* .homePage {
   overflow-x: hidden;
   overflow-y: hidden;
   min-height: 110vh;
@@ -178,7 +178,6 @@ form > div {
 
   .input > div {
     padding: 0.5rem 1rem;
-    background: #e34728;
     margin-left: 0.5rem;
     color: #fff;
     font-weight: 700;
@@ -227,7 +226,7 @@ form > div {
   }
   .hide {
     display: none;
-  }
+  } */
 
 /* :root {
   --foreground-rgb: 0, 0, 0;

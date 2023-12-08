@@ -124,44 +124,50 @@ export default function Form()
             <form className="homeForm" onSubmit={handleSubmit}>
               <div className="input-group">
                   <label htmlFor="title">Topic Name: </label>
-                  <input type="text" placeholder="Title:" name="topicName" id="title" required/>
+            <input className="block flex-1 border-1 bg-slate-100 py-1.5 pl-1 rounded text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+              type="text" placeholder="Topic Name" name="topicName" id="title" required />
                 </div>
 
                 <div className="input-group">
                   <label htmlFor="description">Description: </label>
-                  <input type="text" placeholder="Title:" name="description" id="description" required/>
+            <input className="block flex-1 border-1 bg-slate-100 py-1.5 pl-1 rounded text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+              type="text" placeholder="Description" name="description" id="description" required />
                 </div>
 
                 {formValues.map((obj, index) => (
-                    <Input 
+                  <Input 
                         key={index}
                         objValue={obj}
                         onChange={handleChange}
                         index={index}
-                        deleteField={handleDeleteField}
+                        // deleteField={handleDeleteField}
                     />
                 ))}
                 {!toggle ? (
                     <div className="center">
-                        <button className="add-btn" onClick={addBtnClick}>
+                        <button className="add-btn rounded" onClick={addBtnClick}>
                         Add new
                         </button>
                     </div>
                     ) : (
                     <div className="dialog-box">
-                        <input type="text" placeholder="label" ref={inputRef} />
-                        <select ref={selectRef} id={selectRef}>
+                <input
+                  className="block flex-1 border-1 bg-slate-100 py-1.5 pl-1 rounded text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                  type="text" placeholder="label" ref={inputRef} />
+                <select
+                  className="block flex-1 border-1 bg-slate-100 py-1.5 pl-1 rounded text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                  ref={selectRef} id={selectRef}>
                             <option value="notes">Notes</option>
                             <option value="links">Links</option>
                             <option value="file">File Input</option>
                         </select>
-                        <button className="add-btn" onClick={handleAddField}>
+                        <button className="add-btn rounded" onClick={handleAddField}>
                         Add
                         </button>
                     </div>
                     )}
 
-                <button type="submit" className="submit-btn">Submit</button>
+                <button type="submit" className="submit-btn rounded">Submit</button>
             </form>
         </div>
     )

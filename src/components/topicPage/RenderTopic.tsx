@@ -152,9 +152,7 @@ export default function RenderTopic() {
           <p>{topic.description}</p>
 
           {topic.parentTopic && (
-            <a href={`/topics/${topic.parentTopic.id}`}>
-            {topic.parentTopic.topicName}
-          </a>
+            <a href={`/topics/${topic.parentTopic.id}`}> {topic.parentTopic.topicName}</a>
           )}
 
           {topic.childTopics && topic.childTopics.length > 0 && (

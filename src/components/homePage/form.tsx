@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef } from "react";
 import Input from "./input";
+import AllTopics from "components/allTopics";
 import { toast } from "react-toastify";
 
 // https://www.telerik.com/blogs/how-to-programmatically-add-input-fields-react-forms
@@ -24,7 +25,6 @@ export default function Form()
 
     const inputRef = useRef();
     const selectRef = useRef();
-
 
     const handleChange = (newValue, index) => {
           setFormValues((prevValues) => {
@@ -74,6 +74,8 @@ export default function Form()
             .filter((val) => val && val.type === 'file')
             .map((val) => val.value);
 
+          const parentTopicId = document.querySelector("#parentTopicSelect").value;
+
           const res = await fetch('http://localhost:3000/api/topics', { // Change link once deployed
             method: 'POST',
             headers: {
@@ -87,6 +89,7 @@ export default function Form()
               links,
               attachments,
               label: 'Label',
+              parentId: parentTopicId,
             })
           })
           
@@ -126,6 +129,8 @@ export default function Form()
                   <label htmlFor="description">Description: </label>
                   <input type="text" placeholder="Title:" name="description" id="description" required/>
                 </div>
+
+                <AllTopics renderAsSelect />
 
                 {formValues.map((obj, index) => (
                     <Input 

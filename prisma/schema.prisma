@@ -23,6 +23,10 @@ model topics {
   notes   notes[] @relation("TopicToNotes")
   links   links[]  @relation("TopicToLinks")
   attachments attachments[] @relation("TopicToAttachments")
+
+  parentId       String?   @db.ObjectId
+  parentTopic    topics?     @relation("ChildTopics", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  childTopics    topics[]    @relation("ChildTopics")
 }
 
 model users {

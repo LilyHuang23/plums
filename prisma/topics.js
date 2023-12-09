@@ -18,13 +18,15 @@ export const getTopic = async id => {
             notes: true,
             links: true, 
             attachments: true,
+            parentTopic: true,
+            childTopics: true,
         },
     })
     return topic;
 }
 
 // CREATE 
-export const createTopic = async ( userId, topicName, description, notes, links, label, attachments) => {
+export const createTopic = async ( userId, topicName, description, notes, links, label, attachments, parentId) => {
     const result = await prisma.$transaction(async (prisma) => {
         // Add topic to topics collection with given data
         const createdTopic = await prisma.topics.create({
@@ -33,6 +35,7 @@ export const createTopic = async ( userId, topicName, description, notes, links,
                 description, 
                 userId,
                 label,
+                parentId,
             },
         });
 

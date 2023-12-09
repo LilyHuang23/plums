@@ -34,6 +34,7 @@ export default function RenderTopic() {
                 if (response.ok) {
                     const data = await response.json();
                     setTopic(data);
+                    console.log(data);
                 } else {
                     toast.error('Error getting topic', {
                     position: toast.POSITION.BOTTOM_CENTER,
@@ -54,7 +55,7 @@ export default function RenderTopic() {
                   });
             }
         }
- 
+
         fetchTopic();
     }, [id]);
  
@@ -77,7 +78,7 @@ export default function RenderTopic() {
                         autoClose: 3000,
                         closeOnClick: true,
                         draggable: true,
-                    });
+                    });``
                     
                 } else {
                     toast.error('Error deleting topic', {
@@ -87,7 +88,7 @@ export default function RenderTopic() {
                         draggable: true,
                     });
     
-                    throw new Error('Failed to delete topic.');
+                    throw new Error('Failed to delete to`pic.');
                 }
             } catch (error) {
                 console.error('Error deleting topic:', error);
@@ -97,7 +98,6 @@ export default function RenderTopic() {
     }
 
     const handleUpdate = () => {
-
         setFormData({
             topicName: topic.topicName || "",
             description: topic.description || "",

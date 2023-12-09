@@ -19,34 +19,36 @@ export async function GET (req, { params }) {
 }
 
 export async function PUT (req, { params }) {
-
     const { id } = params;
     const body = await req.json();
 
     const { topicName, 
             description, 
+            notesData,
             newNotes, 
-            newLinks, 
             notesToDelete, 
+            linksData,
+            newLinks, 
             linksToDelete, 
-            label, 
-            attachments } = body;
-
+            newAttachments,
+            attachmentsToDelete,
+            label } = body;
 
     try {
         const result = await updateTopic(
             id,
-            topicName,
-            description,
-            newNotes,
-            newLinks,
-            notesToDelete,
-            linksToDelete,
-            label,
-            attachments
+            topicName, 
+            description, 
+            notesData,
+            newNotes, 
+            notesToDelete, 
+            linksData,
+            newLinks, 
+            linksToDelete, 
+            newAttachments,
+            attachmentsToDelete,
+            label
         )
-
-        
 
         return Response.json(result, {status: 200 });
     } catch (error) {
@@ -58,8 +60,6 @@ export async function PUT (req, { params }) {
 export async function DELETE(req, { params }) {
     const { id } = params;
 
-    console.log('test1')
-    console.log('Deleting topic with ID:', id);
     await deleteTopic(id);
     
     try {

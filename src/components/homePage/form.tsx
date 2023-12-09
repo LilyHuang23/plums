@@ -25,10 +25,6 @@ export default function Form()
     const inputRef = useRef();
     const selectRef = useRef();
 
-    const handleFormReset = () => {
-      setFormValues(initialFormState); // Reset formValues state
-      setToggle(initialToggleState); // Reset toggle state
-    };
 
     const handleChange = (newValue, index) => {
           setFormValues((prevValues) => {
@@ -97,15 +93,14 @@ export default function Form()
           // Toast Pop-up notification
           toast.success('Form submitted successfully!', {
             position: toast.POSITION.BOTTOM_CENTER,
-            autoClose: 3000,
+            autoClose: 2500,
             closeOnClick: true,
             draggable: true,
           });
 
-          // Reset Form
-          handleFormReset();
-
-
+          setTimeout(() => {
+            window.location.reload();
+        }, 3000);
         } catch (error) {
           console.error('Error creating topic:', error);
 
@@ -141,6 +136,7 @@ export default function Form()
                         deleteField={handleDeleteField}
                     />
                 ))}
+                
                 {!toggle ? (
                     <div className="center">
                         <button className="add-btn" onClick={addBtnClick}>

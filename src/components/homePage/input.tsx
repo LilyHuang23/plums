@@ -49,6 +49,7 @@ export default function Input({ objValue, onChange, index, deleteField }) {
             }
         }
     }
+
     if (type === 'file') {
         return (
             <div className="input-group">
@@ -57,13 +58,13 @@ export default function Input({ objValue, onChange, index, deleteField }) {
                     <input
                         type="file"
                         id={label}
-                        onChange={convertFileToBase64} // Call function on file change
+                        onChange={convertFileToBase64}
                     />
                 </div>
                 <div>
                     {image && <p>Selected file: {image.name}</p>}
                 </div>
-                <button className="" onClick={(e) => deleteField(e, index)}>Delete</button>
+                <button type="button" className="" onClick={(e) => deleteField(e, index)}>Delete</button>
             </div>
         );
     } else if (type === 'notes' || type === 'links') {
@@ -80,7 +81,7 @@ export default function Input({ objValue, onChange, index, deleteField }) {
                     }}
                     />
             </div>
-            <button className="" onClick={(e) => deleteField(e, index)}>Delete</button>
+            <button type="button" onClick={(e) => deleteField(e, index)}>Delete</button>
         </div>
         );
     }

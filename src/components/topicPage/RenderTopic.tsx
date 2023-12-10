@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { usePathname } from "next/navigation";
 
 import UpdateForm from "./updateForm";
-
+import Image from "next/image";
 export default function RenderTopic() {
   const [topic, setTopic] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -171,7 +171,7 @@ export default function RenderTopic() {
           <div className="attachments">
             {topic.attachments &&
               topic.attachments.map((attachment, index) => (
-                <img
+                <Image
                   key={index}
                   src={attachment.content}
                   alt={`Attachment ${index}`}

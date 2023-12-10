@@ -26,7 +26,8 @@
     "@/components/landingPage/pricing": ["components/landingPage/pricing"],
     "@/components/landingPage/feature": ["components/landingPage/feature"],
     "@/components/card":["components/header"],
-    "@/components/sidebar":["components/sidebar"]
+    "@/components/sidebar":["components/sidebar"],
+    "@/components/topicPage/UpdateForm":["components/topicPage/UpdateForm"]
   
   },
 // "paths": {

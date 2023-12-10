@@ -2,7 +2,10 @@
 import { useState, useRef } from "react";
 import Input from "./input";
 import AllTopics from "components/allTopics";
+import AllTags from "components/tagsPage/allTags";
+
 import { toast } from "react-toastify";
+
 
 // https://www.telerik.com/blogs/how-to-programmatically-add-input-fields-react-forms
 // https://codepen.io/arefeh_htmi/pen/mdPYZKJ?editors=1100
@@ -23,6 +26,8 @@ export default function Form()
     const [formValues, setFormValues] = useState<FormValue[]>(initialFormState);
     const [toggle, setToggle] = useState(initialToggleState);
 
+    const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
     const inputRef = useRef();
     const selectRef = useRef();
 
@@ -33,7 +38,7 @@ export default function Form()
             return updatedValues;
         });
       };
-    
+
       const handleAddField = (e) => {
         e.preventDefault();
         const values = [...formValues];
@@ -52,7 +57,6 @@ export default function Form()
         setFormValues(values);
       }
 
-      
       const addBtnClick = (e) => {
         e.preventDefault();
         setToggle(true);
@@ -74,7 +78,15 @@ export default function Form()
             .filter((val) => val && val.type === 'file')
             .map((val) => val.value);
 
-          const parentTopicId = document.querySelector("#parentTopicSelect").value;
+          // Get parent ID, allow it to be null
+          const parentTopicSelect = document.querySelector("#parentTopicSelect");
+          const parentTopicId = parentTopicSelect.value;
+          const parentId = parentTopicId ? parentTopicId : null;
+
+          // Get tag IDs
+          const selectedTags = document.querySelectorAll('input[type="checkbox"]:checked');
+          const tagNames = Array.from(selectedTags).map((tag) => tag.value);
+          const tagIds = tagNames;
 
           const res = await fetch('http://localhost:3000/api/topics', { // Change link once deployed
             method: 'POST',
@@ -89,7 +101,9 @@ export default function Form()
               links,
               attachments,
               label: 'Label',
-              parentId: parentTopicId,
+              parentId,
+              tagNames,
+              tagIds
             })
           })
           
@@ -104,6 +118,7 @@ export default function Form()
           setTimeout(() => {
             window.location.reload();
         }, 3000);
+
         } catch (error) {
           console.error('Error creating topic:', error);
 
@@ -131,6 +146,7 @@ export default function Form()
                 </div>
 
                 <AllTopics renderAsSelect />
+                <AllTags />
 
                 {formValues.map((obj, index) => (
                     <Input 

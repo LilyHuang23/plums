@@ -7,7 +7,6 @@ export default function AllTopics({ renderAsSelect = false }) {
     const [topics, setTopics ] = useState([]);
 
     useEffect(() => {
-        console.log(topics);
         const fetchTopics = async () => {
             try {
                 const response = await fetch('http://localhost:3000/api/topics', {
@@ -50,6 +49,7 @@ export default function AllTopics({ renderAsSelect = false }) {
         <div>
           <h1>Parent Topic:</h1>
           <select id="parentTopicSelect">
+            <option value="">- Select -</option>
             {topics.map((topic) => (
               <option key={topic.id} value={topic.id}>
                 {topic.topicName}

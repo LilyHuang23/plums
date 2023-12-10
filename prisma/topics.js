@@ -3,12 +3,17 @@ import prisma from "./prisma";
 // READ
 export const getAllTopics = async () => {
     const topics = await prisma.topics.findMany({
-        // include: {
-        //     notes: true,
-        //     links: true, 
-        // },
+        include: {
+            // notes: true,
+            // links: true, 
+        },
     });
     return topics;
+}
+
+export const getAllTags = async () => {
+    const tags = await prisma.tags.findMany({});
+    return tags;
 }
 
 export const getTopic = async id => {
@@ -20,13 +25,14 @@ export const getTopic = async id => {
             attachments: true,
             parentTopic: true,
             childTopics: true,
+            tags: true,
         },
     })
     return topic;
 }
 
 // CREATE 
-export const createTopic = async ( userId, topicName, description, notes, links, label, attachments, parentId) => {
+export const createTopic = async ( userId, topicName, description, notes, links, label, attachments, parentId, tagNames, tagIds) => {
     const result = await prisma.$transaction(async (prisma) => {
         // Add topic to topics collection with given data
         const createdTopic = await prisma.topics.create({
@@ -36,6 +42,9 @@ export const createTopic = async ( userId, topicName, description, notes, links,
                 userId,
                 label,
                 parentId,
+                tags: {
+                    connect: tagIds.map((id) => ({ id })),
+                }, 
             },
         });
 
@@ -78,6 +87,17 @@ export const createTopic = async ( userId, topicName, description, notes, links,
     return result;
 }
 
+// Create a tag
+export const createTag = async ( name ) => {
+    const result = await prisma.$transaction(async (prisma) => {
+        const createdTag = await prisma.tags.create({
+            data: {
+                name,
+            }
+        })
+    })
+}
+
 // UPDATE
 export const updateTopic = async (id, 
                                   topicName, 
@@ -87,13 +107,6 @@ export const updateTopic = async (id,
                                   newAttachments, attachmentsToDelete,
                                   label) => {
 
-    console.log("TEST #2 - PRISMA TOPICS.JS")
-    console.log("New notes:", newNotes);
-    console.log("Deleted notes:", notesToDelete);
-    console.log("New links:", newLinks);
-    console.log("Deleted links:", linksToDelete);
-    console.log("New attachments:", newAttachments);
-    console.log("Deleted attachments:", attachmentsToDelete);
 
     const result = await prisma.$transaction(async (prisma) => {
         // Udate topic information
@@ -150,7 +163,6 @@ export const updateTopic = async (id,
 
         // Delete notes that the user wants deleted
         if (notesToDelete && notesToDelete.length > 0) {
-            console.log("test 3")
             
             await prisma.notes.deleteMany({
                 where: {
@@ -213,7 +225,7 @@ export const updateTopic = async (id,
 // DELETE
 export const deleteTopic = async (id) => {
     const result = await prisma.$transaction(async (prisma) => {
-        console.log('test2')
+
 
         // Delete associated notes
         await prisma.notes.deleteMany({
@@ -228,6 +240,21 @@ export const deleteTopic = async (id) => {
         await prisma.attachments.deleteMany({
             where: { topicId: id },
         });
+
+        // Get a list of child topics
+        const childTopics = await prisma.topics.findMany({
+            where: { parentId: id },
+        });
+
+        // Remove the parentId from child topics to unlink them
+        await Promise.all(
+            childTopics.map(async (childTopic) => {
+                await prisma.topics.update({
+                    where: { id: childTopic.id },
+                    data: { parentId: null }, // Update parentId to null
+                });
+            })
+        );
 
         // Delete associated topic
         await prisma.topics.delete({

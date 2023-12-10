@@ -4,20 +4,16 @@ import Card from '../../components/allTopicsPage/card';
 import SideBar from '../../components/sidebar';
 import Header from '../../components/header';
 
-import AllTopics from '../../components/allTopics';
-
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import TagForm from 'components/tagsPage/TagForm';
 
-export default function TopicsPage() {
+export default function TagsPage() {
   return (
     <main>
       <Header />
-      <SideBar />
-      <AllTopics />
-
-      <ToastContainer />
-      {/* <Card /> */}
+      <TagForm />
+      <h1>Add Tags:</h1>
     </main>
   )
 }

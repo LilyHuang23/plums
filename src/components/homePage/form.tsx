@@ -1,7 +1,11 @@
 'use client'
 import { useState, useRef } from "react";
 import Input from "./input";
+import AllTopics from "components/allTopics";
+import AllTags from "components/tagsPage/allTags";
+
 import { toast } from "react-toastify";
+
 
 // https://www.telerik.com/blogs/how-to-programmatically-add-input-fields-react-forms
 // https://codepen.io/arefeh_htmi/pen/mdPYZKJ?editors=1100
@@ -22,13 +26,10 @@ export default function Form()
     const [formValues, setFormValues] = useState<FormValue[]>(initialFormState);
     const [toggle, setToggle] = useState(initialToggleState);
 
+    const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
     const inputRef = useRef();
     const selectRef = useRef();
-
-    const handleFormReset = () => {
-      setFormValues(initialFormState); // Reset formValues state
-      setToggle(initialToggleState); // Reset toggle state
-    };
 
     const handleChange = (newValue, index) => {
           setFormValues((prevValues) => {
@@ -37,7 +38,7 @@ export default function Form()
             return updatedValues;
         });
       };
-    
+
       const handleAddField = (e) => {
         e.preventDefault();
         const values = [...formValues];
@@ -56,7 +57,6 @@ export default function Form()
         setFormValues(values);
       }
 
-      
       const addBtnClick = (e) => {
         e.preventDefault();
         setToggle(true);
@@ -78,6 +78,16 @@ export default function Form()
             .filter((val) => val && val.type === 'file')
             .map((val) => val.value);
 
+          // Get parent ID, allow it to be null
+          const parentTopicSelect = document.querySelector("#parentTopicSelect");
+          const parentTopicId = parentTopicSelect.value;
+          const parentId = parentTopicId ? parentTopicId : null;
+
+          // Get tag IDs
+          const selectedTags = document.querySelectorAll('input[type="checkbox"]:checked');
+          const tagNames = Array.from(selectedTags).map((tag) => tag.value);
+          const tagIds = tagNames;
+
           const res = await fetch('http://localhost:3000/api/topics', { // Change link once deployed
             method: 'POST',
             headers: {
@@ -91,20 +101,23 @@ export default function Form()
               links,
               attachments,
               label: 'Label',
+              parentId,
+              tagNames,
+              tagIds
             })
           })
           
           // Toast Pop-up notification
           toast.success('Form submitted successfully!', {
             position: toast.POSITION.BOTTOM_CENTER,
-            autoClose: 3000,
+            autoClose: 2500,
             closeOnClick: true,
             draggable: true,
           });
 
-          // Reset Form
-          handleFormReset();
-
+          setTimeout(() => {
+            window.location.reload();
+        }, 3000);
 
         } catch (error) {
           console.error('Error creating topic:', error);
@@ -134,6 +147,9 @@ export default function Form()
               type="text" placeholder="Description" name="description" id="description" required />
                 </div>
 
+                <AllTopics renderAsSelect />
+                <AllTags />
+
                 {formValues.map((obj, index) => (
                   <Input 
                         key={index}
@@ -143,6 +159,7 @@ export default function Form()
                         // deleteField={handleDeleteField}
                     />
                 ))}
+                
                 {!toggle ? (
                     <div className="center">
                         <button className="add-btn rounded" onClick={addBtnClick}>

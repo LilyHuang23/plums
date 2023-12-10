@@ -8,8 +8,6 @@ import Form from '../../components/homePage/form'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
 export default function Home() {
   return (
     <main className='homePage w-full'>

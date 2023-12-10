@@ -18,11 +18,16 @@ model topics {
   
   topicName     String?
   description   String?
-  attachments String[]
   label       String?
   
   notes   notes[] @relation("TopicToNotes")
   links   links[]  @relation("TopicToLinks")
+  attachments attachments[] @relation("TopicToAttachments")
+  tags    tags[]    @relation("TopicToTags")
+
+  parentId       String?   @db.ObjectId
+  parentTopic    topics?     @relation("ChildTopics", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  childTopics    topics[]    @relation("ChildTopics")
 }
 
 model users {
@@ -45,6 +50,14 @@ model notes {
   topic   topics @relation("TopicToNotes", fields: [topicId], references: [id])
   label         String?
 }
+
+model attachments {
+  id      String @id @default(auto())  @map("_id") @db.ObjectId
+  content String
+  topicId String @db.ObjectId
+  topic   topics @relation("TopicToAttachments", fields: [topicId], references: [id])
+  label         String?
+}
  
 
 model links {
@@ -53,4 +66,11 @@ model links {
   topicId String @db.ObjectId
   topic   topics @relation("TopicToLinks", fields: [topicId], references: [id])
   label         String?
+}
+
+model tags {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  topicId   String? @db.ObjectId
+  topics    topics? @relation("TopicToTags", fields: [topicId], references: [id])
 }

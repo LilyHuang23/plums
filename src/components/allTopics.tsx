@@ -1,13 +1,12 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { toast } from "react-toastify";
-import Card from "./card";
+import Card from "./allTopicsPage/card";
 
-export default function AllTopics() {
+export default function AllTopics({ renderAsSelect = false }) {
     const [topics, setTopics ] = useState([]);
 
     useEffect(() => {
-        console.log(topics);
         const fetchTopics = async () => {
             try {
                 const response = await fetch('http://localhost:3000/api/topics', {
@@ -45,19 +44,30 @@ export default function AllTopics() {
         fetchTopics();
     }, []);
 
-    return (
+    if (renderAsSelect) {
+      return (
         <div>
-          <h1>All Topics</h1>
-          <div className="topics-list">
-            {/* Render a Card for each topic */}
+          <h1>Parent Topic:</h1>
+          <select id="parentTopicSelect">
+            <option value="">- Select -</option>
             {topics.map((topic) => (
-              <Card
-                key={topic.id}
-                topicId={topic.id}
-                topicName={topic.topicName}
-              />
+              <option key={topic.id} value={topic.id}>
+                {topic.topicName}
+              </option>
             ))}
-          </div>
+          </select>
         </div>
       );
-}
+    }
+  
+    return (
+      <div>
+        <h1>All Topics</h1>
+        <div className="topics-list">
+          {topics.map((topic) => (
+            <Card key={topic.id} topicId={topic.id} topicName={topic.topicName} />
+          ))}
+        </div>
+      </div>
+    );
+  };

@@ -78,11 +78,9 @@ export default function Input({ objValue, onChange, index, deleteField }) {
                     </div>
                     
                 {/* <div>
-                    
                     {image && <p>Selected file: {image.name}</p>}
                 </div> */}
                 <button className="text-red-400" onClick={(e) => deleteField(e, index)}>Delete</button>
-
             </div>
         );
     } else if (type === 'notes' || type === 'links') {

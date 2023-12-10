@@ -156,7 +156,7 @@ export default function Form()
                         objValue={obj}
                         onChange={handleChange}
                         index={index}
-                        // deleteField={handleDeleteField}
+                        deleteField={handleDeleteField}
                     />
                 ))}
                 

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { toast } from "react-toastify";

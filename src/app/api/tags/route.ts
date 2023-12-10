@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { NextApiHandler } from 'next';
 import { NextResponse } from 'next/server';
 

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { usePathname } from "next/navigation";
 
-import UpdateForm from "./updateForm";
+import UpdateForm from "./updateForm.js";
 import Image from "next/image";
 export default function RenderTopic() {
   const [topic, setTopic] = useState([]);

@@ -57,7 +57,7 @@ export default function UpdateForm({ formValues }) {
     const deletedAttachment = updatedAttachments.splice(index, 1)[0];
     setFormData({ ...formData, attachments: updatedAttachments });
 
-    // Add deleted attachment to the deletddAttachments state
+    // Add deleted attachment to the deleted Attachments state
     setDeletedAttachments([ ...deletedAttachments, deletedAttachment])
   };
 
